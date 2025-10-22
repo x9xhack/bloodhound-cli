@@ -165,7 +165,8 @@ func RunBasicCmd(name string, args []string) (string, error) {
 // RunCmd executes a given command ("name") with a list of arguments ("args")
 // and return stdout and stderr buffers.
 func RunCmd(name string, args []string) error {
-	if name == "docker" {
+	// If the command is ``docker`` or ``podman``, prepend ``compose`` to the args
+	if name == "docker" || name == "podman" {
 		args = append([]string{"compose"}, args...)
 	}
 	path, err := exec.LookPath(name)
