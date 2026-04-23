@@ -9,6 +9,10 @@ import (
 
 func setGraphDriver(driver string) {
 	env.SetConfig("graph_driver", driver)
+	// If driver is `pg` or `postgres` or `postgresql`, change string to `PostgreSQL` for user-friendly output
+	if driver == "pg" || driver == "postgres" || driver == "postgresql" {
+		driver = "PostgreSQL"
+	}
 	fmt.Printf("[+] Graph database backend set to %s. Bring containers down and up for changes to take effect.\n", driver)
 }
 
